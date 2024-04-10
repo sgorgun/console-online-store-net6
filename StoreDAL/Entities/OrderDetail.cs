@@ -3,16 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreDAL.Entities
 {
-    // ToDo: add atribute here
+    [Table("customer_order_detail")]
     public class OrderDetail : BaseEntity
     {
-        // ToDo: add atribute here
+        [ForeignKey("Order")]
+        [Column("customer_order_id")]
         public int OrderId { get; set; }
-        // ToDo: add atribute here
+        
+        [ForeignKey("Product")]
+        [Column("product_id")]
         public int ProductId { get; set; }
-        // ToDo: add atribute here
+        
+        [Column("price")]
         public decimal Price { get; set; }
-        // ToDo: add atribute here
+
+        [Column("product_amount")]
         public int ProductAmount { get; set; }
         public CustomerOrder Order { get; set; }
         public Product Product { get; set; }

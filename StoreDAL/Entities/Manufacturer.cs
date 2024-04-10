@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreDAL.Entities
 {
-    // ToDo: add atribute here
+    [Table("manufacturers")]
     public class Manufacturer : BaseEntity
     {
-        // ToDo: add atribute here
+        [Column("manufacturer_name")]
         public string Name { get; set; }
         public Manufacturer() : base() { }
         public Manufacturer(int id, string name) : base(id)

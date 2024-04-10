@@ -36,11 +36,21 @@ namespace StoreDAL.Data.InitDataFactory
 
         public override Manufacturer[] GetManufacturerData()
         {
-            return Array.Empty<Manufacturer>();
+            return new[]
+            {
+                new Manufacturer(1, "Manufacturer 1"),
+                new Manufacturer(2, "Manufacturer 2"),
+                new Manufacturer(3, "Manufacturer 3"),
+            };
         }
         public override OrderDetail[] GetOrderDetailData()
         {
-            return Array.Empty<OrderDetail>();
+            return new[]
+            {
+                new OrderDetail(1, 1, 1, 2, 20),
+                new OrderDetail(2, 2, 2, 3, 60),
+                new OrderDetail(3, 3, 3, 1, 10),
+            };
         }
 
         public override OrderState[] GetOrderStateData()
@@ -59,15 +69,30 @@ namespace StoreDAL.Data.InitDataFactory
         }
         public override Product[] GetProductData()
         {
-            return Array.Empty<Product>();
+            return new[]
+            {
+                new Product(1, 1, 1, "Product 1 description", 10.0m),
+                new Product(2, 2, 2, "Product 2 description", 20.0m),
+                new Product(3, 3, 3, "Product 3 description", 30.0m),
+            };
         }
         public override ProductTitle[] GetProductTitleData()
         {
-            return Array.Empty<ProductTitle>();
+            return new[]
+            {
+                new ProductTitle(1, "Product Title 1", 1),
+                new ProductTitle(2, "Product Title 2", 2),
+                new ProductTitle(3, "Product Title 3", 3),
+            };
         }
         public override User[] GetUserData()
         {
-            return Array.Empty<User>();
+            return new[]
+            {
+                new User(1, "User 1", "user1@example.com", "login1", "password1", 1),
+                new User(2, "User 2", "user2@example.com"," login2", "password2", 2),
+                new User(3, "User 3", "user3@example.com", "login3", "password3", 3),
+            };
         }
         public override UserRole[] GetUserRoleData()
         {
