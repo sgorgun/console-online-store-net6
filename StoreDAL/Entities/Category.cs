@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreDAL.Entities
 {
-    // ToDo: add atribute here
+    [Table("categories")]
     public class Category : BaseEntity
     {
-        // ToDo: add atribute here
+        [Column("category_name")]
         public string Name { get; set; }
         public virtual IList<ProductTitle> Titles { get; set; }
         public Category():base() { }

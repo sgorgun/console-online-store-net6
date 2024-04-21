@@ -8,7 +8,7 @@ namespace StoreDAL.Interfaces
     {
         IEnumerable<TEntity> GetAll();
 
-        IEnumerable<TEntity> GetAll(int pageNumber, int RowCount);
+        IEnumerable<TEntity> GetAll(int pageNumber, int rowCount);
         TEntity GetById(int id);
 
         void Add(TEntity entity);

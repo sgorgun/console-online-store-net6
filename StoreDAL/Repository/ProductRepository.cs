@@ -5,44 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using StoreDAL.Data;
 
 namespace StoreDAL.Repository
 {
-    public class ProductRepository : IProductRepository
+    /// <summary>
+    /// Represents a repository for managing products.
+    /// </summary>
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
-        public void Add(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly DbSet<Product> dbSet;
 
-        public void Delete(Product entity)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductRepository"/> class.
+        /// </summary>
+        /// <param name="context">The store database context.</param>
+        public ProductRepository(StoreDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context), "The database context is null");
+            }
 
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Product> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Product> GetAll(int pageNumber, int rowCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Product entity)
-        {
-            throw new NotImplementedException();
+            dbSet = context.Set<Product>();
         }
     }
 }

@@ -7,14 +7,16 @@ namespace StoreBLL.Models
 {
     public class ManufacturerModel : AbstractModel
     {
-        public ManufacturerModel(int id, string name):base(id)
+        public string ManufacturerName { get; set; }
+        public ManufacturerModel(int id, string name) : base(id)
         {
-
+            this.Id = id;
+            this.ManufacturerName = name;
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"Id:{Id} {ManufacturerName}";
         }
     }
 }

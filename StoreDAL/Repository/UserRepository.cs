@@ -5,44 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreDAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace StoreDAL.Repository
 {
-    public class UserRepository : IUserRepository
+    /// <summary>
+    /// Represents a repository for managing users.
+    /// </summary>
+    public class UserRepository : Repository<User>, IUserRepository
     {
-        public void Add(User entity)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly DbSet<User> dbSet;
 
-        public void Delete(User entity)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserRepository"/> class.
+        /// </summary>
+        /// <param name="context">The store database context.</param>
+        public UserRepository(StoreDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context), "The database context is null");
+            }
 
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll(int pageNumber, int rowCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(User entity)
-        {
-            throw new NotImplementedException();
+            dbSet = context.Set<User>();
         }
     }
 }

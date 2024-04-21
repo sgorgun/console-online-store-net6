@@ -10,52 +10,25 @@ using System.Threading.Tasks;
 
 namespace StoreDAL.Repository
 {
-    public class UserRoleRepository : AbstractRepository, IUserRoleRepository
+    /// <summary>
+    /// Represents a repository for managing user roles.
+    /// </summary>
+    public class UserRoleRepository : Repository<UserRole>, IUserRoleRepository
     {
         private readonly DbSet<UserRole> dbSet;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserRoleRepository"/> class.
+        /// </summary>
+        /// <param name="context">The store database context.</param>
         public UserRoleRepository(StoreDbContext context) : base(context)
         {
-            dbSet = context.Set<UserRole>();
-        }
-        public void Add(UserRole entity)
-        {
-            dbSet.Add(entity);
-            context.SaveChanges();
-        }
-
-        public void Delete(UserRole entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(int id)
-        {
-            var entity = dbSet.Find(id);
-            if (entity != null)
+            if (context == null)
             {
-                dbSet.Remove(entity);
-                context.SaveChanges();
+                throw new ArgumentNullException(nameof(context), "The database context is null");
             }
-        }
 
-        public IEnumerable<UserRole> GetAll()
-        {
-            return dbSet.ToList();
-        }
-
-        public IEnumerable<UserRole> GetAll(int pageNumber, int RowCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserRole GetById(int id)
-        {
-            return dbSet.Find(id);
-        }
-
-        public void Update(UserRole entity)
-        {
-            throw new NotImplementedException();
+            dbSet = context.Set<UserRole>();
         }
     }
 }

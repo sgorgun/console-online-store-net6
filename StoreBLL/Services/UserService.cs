@@ -1,40 +1,33 @@
-﻿using StoreDAL.Entities;
+﻿using StoreBLL.Interfaces;
+using StoreBLL.Models;
+using StoreDAL.Data;
+using StoreDAL.Entities;
 using StoreDAL.Interfaces;
-using StoreBLL.Interfaces;
+using StoreDAL.Repository;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StoreBLL.Models;
-using StoreDAL.Data;
 
 namespace StoreBLL.Services
 {
-    public class UserService : ICrud
+    public class UserService : CrudServiceBase<UserModel, User>
     {
         public UserService(StoreDbContext context)
+            : base(new UserRepository(context))
         {
         }
-        public void Add(AbstractModel model)
+
+        protected override User ModelToEntity(UserModel model)
         {
-            throw new NotImplementedException();
+            return new User(model.Id, model.UserName, model.LastName, model.Login, model.Password, model.RoleId);
         }
-        public void Delete(int modelId)
+
+        protected override UserModel EntityToModel(User entity)
         {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<AbstractModel> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-        public AbstractModel GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-        public void Update(AbstractModel model)
-        {
-            throw new NotImplementedException();
+            return new UserModel(entity.Id, entity.Name, entity.LastName, entity.Login, entity.Password, entity.RoleId);
         }
     }
 }
