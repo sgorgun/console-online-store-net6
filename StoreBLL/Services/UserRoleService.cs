@@ -13,35 +13,22 @@ using System.Threading.Tasks;
 
 namespace StoreBLL.Services
 {
-    public class UserRoleService : ICrud
+    public class UserRoleService : CrudServiceBase<UserRoleModel, UserRole>
     {
-        IUserRoleRepository repository;
         public UserRoleService(StoreDbContext context)
+            : base(new UserRoleRepository(context))
         {
-            repository = new UserRoleRepository(context);
         }
-        public void Add(AbstractModel model)
+
+        protected override UserRole ModelToEntity(UserRoleModel model)
         {
-            var x = (UserRoleModel)model;
-            repository.Add(new UserRole(x.Id, x.RoleName));
+            return new UserRole(model.Id, model.RoleName);
         }
-        public void Delete(int modelId)
+
+        protected override UserRoleModel EntityToModel(UserRole entity)
         {
-            repository.DeleteById(modelId);
-        }
-        public IEnumerable<AbstractModel> GetAll()
-        {
-            return repository.GetAll().Select(x=>new UserRoleModel(x.Id,x.RoleName));
-            throw new NotImplementedException();
-        }
-        public AbstractModel GetById(int id)
-        {
-            var res = repository.GetById(id);
-            return new UserRoleModel(res.Id, res.RoleName);
-        }
-        public void Update(AbstractModel model)
-        {
-            throw new NotImplementedException();
+            return new UserRoleModel(entity.Id, entity.RoleName);
         }
     }
+
 }
