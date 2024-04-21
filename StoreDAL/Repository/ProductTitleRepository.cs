@@ -1,4 +1,6 @@
-﻿using StoreDAL.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreDAL.Data;
+using StoreDAL.Entities;
 using StoreDAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,41 +10,26 @@ using System.Threading.Tasks;
 
 namespace StoreDAL.Repository
 {
-    public class ProductTitleRepository : IProductTitleRepository
+    /// <summary>
+    /// Represents a repository for managing product titles.
+    /// </summary>
+    public class ProductTitleRepository : Repository<ProductTitle>, IProductTitleRepository
     {
-        public void Add(ProductTitle entity)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly DbSet<ProductTitle> dbSet;
 
-        public void Delete(ProductTitle entity)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductTitleRepository"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
+        /// <exception cref="ArgumentNullException">Thrown when the database context is null.</exception>
+        public ProductTitleRepository(StoreDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context), "The database context is null");
+            }
 
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ProductTitle> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ProductTitle> GetAll(int pageNumber, int rowCount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ProductTitle GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ProductTitle entity)
-        {
-            throw new NotImplementedException();
+            dbSet = context.Set<ProductTitle>();
         }
     }
 }
